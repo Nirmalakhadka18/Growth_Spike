@@ -82,11 +82,17 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </div>
                     </div>
 
-                    {/* Featured Image Placeholder */}
-                    <div className="w-full aspect-[21/9] bg-gradient-to-r from-primary/5 to-muted rounded-2xl mb-12 border border-border" />
+                    {/* Featured Image */}
+                    <div className="w-full aspect-[21/9] rounded-2xl mb-12 border border-border overflow-hidden relative">
+                        <img
+                            src={post.image}
+                            alt={post.title}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
 
                     {/* Content */}
-                    <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary">
+                    <div className="prose prose-lg prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary">
                         <p className="lead text-xl text-muted-foreground mb-8">
                             {post.excerpt}
                         </p>

@@ -33,8 +33,13 @@ export default function BlogPage() {
                             className="flex flex-col bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
                         >
                             <div className="h-48 bg-muted w-full relative group overflow-hidden">
-                                {/* Placeholder for image */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-105 transition-transform duration-500" />
+                                {/* Image */}
+                                <img
+                                    src={post.image}
+                                    alt={post.title}
+                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                                 <div className="absolute top-4 left-4 flex gap-2">
                                     {post.tags.slice(0, 1).map(tag => (
                                         <span key={tag} className="bg-background/90 backdrop-blur-sm px-2 py-1 text-xs font-semibold rounded-md shadow-sm">

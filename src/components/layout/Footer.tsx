@@ -22,20 +22,21 @@ export function Footer() {
                     <div>
                         <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Services</h3>
                         <ul className="mt-4 space-y-2">
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary text-sm">SEO Optimization</Link></li>
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary text-sm">Content Marketing</Link></li>
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary text-sm">Paid Advertising</Link></li>
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary text-sm">Social Media</Link></li>
+                            <li><Link href="/services/seo-optimization" className="text-muted-foreground hover:text-primary text-sm">SEO Optimization</Link></li>
+                            <li><Link href="/services/content-strategy" className="text-muted-foreground hover:text-primary text-sm">Content Strategy</Link></li>
+                            <li><Link href="/services/paid-advertising" className="text-muted-foreground hover:text-primary text-sm">Paid Advertising</Link></li>
+                            <li><Link href="/services/social-media-marketing" className="text-muted-foreground hover:text-primary text-sm">Social Media</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Company</h3>
                         <ul className="mt-4 space-y-2">
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary text-sm">About Us</Link></li>
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary text-sm">Careers</Link></li>
+                            <li><Link href="/dashboard" className="text-muted-foreground hover:text-primary text-sm">Client Dashboard</Link></li>
+                            <li><Link href="/#about" className="text-muted-foreground hover:text-primary text-sm">About Us</Link></li>
+                            <li><Link href="/#contact" className="text-muted-foreground hover:text-primary text-sm">Contact</Link></li>
                             <li><Link href="/blog" className="text-muted-foreground hover:text-primary text-sm">Blog</Link></li>
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary text-sm">Privacy Policy</Link></li>
+                            <li><Link href="/#contact" className="text-muted-foreground hover:text-primary text-sm">Careers</Link></li>
                         </ul>
                     </div>
                 </div>

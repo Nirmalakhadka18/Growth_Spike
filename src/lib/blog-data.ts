@@ -7,6 +7,7 @@ export interface BlogPost {
     author: string;
     authorRole: string;
     tags: string[];
+    image: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -26,7 +27,8 @@ export const blogPosts: BlogPost[] = [
         date: "Feb 1, 2026",
         author: "Sarah Jenkins",
         authorRole: "SEO Specialist",
-        tags: ["SEO", "Trends", "AI"]
+        tags: ["SEO", "Trends", "AI"],
+        image: "https://images.unsplash.com/photo-1572177812156-58036aae439c?auto=format&fit=crop&q=80&w=2070"
     },
     {
         slug: "content-marketing-roi",
@@ -42,7 +44,8 @@ export const blogPosts: BlogPost[] = [
         date: "Jan 28, 2026",
         author: "Mike Ross",
         authorRole: "Content Strategist",
-        tags: ["Content", "Marketing", "Analytics"]
+        tags: ["Content", "Marketing", "Analytics"],
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070"
     },
     {
         slug: "social-media-algorithms-explained",
@@ -58,6 +61,7 @@ export const blogPosts: BlogPost[] = [
         date: "Jan 15, 2026",
         author: "Jessica Pearson",
         authorRole: "Social Media Manager",
-        tags: ["Social Media", "Algorithm", "Growth"]
+        tags: ["Social Media", "Algorithm", "Growth"],
+        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1974"
     }
 ];

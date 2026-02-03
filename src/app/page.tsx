@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, Globe, Zap, CheckCircle2, TrendingUp, Users } from "lucide-react";
 import { motion } from "framer-motion";
+import { services } from "@/lib/services-data";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function Home() {
   return (
@@ -14,15 +16,7 @@ export default function Home() {
 
         <div className="container relative mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center text-center space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center rounded-3xl border border-input bg-background/50 backdrop-blur-sm px-3 py-1 text-sm font-medium text-muted-foreground shadow-sm"
-            >
-              <span className="flex h-2 w-2 rounded-full bg-primary mr-2" />
-              Now accepting new clients for Q2
-            </motion.div>
+
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -49,11 +43,15 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
             >
-              <Button size="lg" className="h-12 px-8 text-base">
-                Start Your Growth <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" className="h-12 px-8 text-base" asChild>
+                <Link href="#contact">
+                  Start Your Growth <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
-              <Button variant="outline" size="lg" className="h-12 px-8 text-base">
-                View Our Work
+              <Button variant="outline" size="lg" className="h-12 px-8 text-base" asChild>
+                <Link href="#services">
+                  View Our Work
+                </Link>
               </Button>
             </motion.div>
           </div>
@@ -61,7 +59,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-muted/30">
+      <section id="services" className="py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl mb-4">Our Expertise</h2>
@@ -71,36 +69,25 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ServiceCard
-              icon={<Globe className="h-10 w-10 text-primary" />}
-              title="SEO Optimization"
-              description="Rank higher on search engines and attract organic traffic with our proven SEO strategies."
-            />
-            <ServiceCard
-              icon={<BarChart3 className="h-10 w-10 text-primary" />}
-              title="Paid Advertising"
-              description="Maximize ROI with targeted PPC campaigns on Google, Facebook, and LinkedIn."
-            />
-            <ServiceCard
-              icon={<Users className="h-10 w-10 text-primary" />}
-              title="Social Media Marketing"
-              description="Build a loyal community and engage your audience with compelling social content."
-            />
-            <ServiceCard
-              icon={<Zap className="h-10 w-10 text-primary" />}
-              title="Content Strategy"
-              description="Create valuable content that educates, entertains, and converts your target audience."
-            />
-            <ServiceCard
-              icon={<TrendingUp className="h-10 w-10 text-primary" />}
-              title="Conversion Rate Optimization"
-              description="Turn more visitors into customers by optimizing your website's user experience."
-            />
-            <ServiceCard
-              icon={<CheckCircle2 className="h-10 w-10 text-primary" />}
-              title="Analytics & Reporting"
-              description="Transparent reporting that shows you exactly where your budget is going and the results achieved."
-            />
+            {services.map((service) => (
+              <Link key={service.slug} href={`/services/${service.slug}`}>
+                <div
+                  className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 cursor-pointer h-full"
+                >
+                  <div className="mb-4 bg-primary/10 w-fit p-3 rounded-lg">
+                    {/* Dynamic Icon Rendering */}
+                    {service.iconName === 'Globe' && <Globe className="h-10 w-10 text-primary" />}
+                    {service.iconName === 'BarChart3' && <BarChart3 className="h-10 w-10 text-primary" />}
+                    {service.iconName === 'Users' && <Users className="h-10 w-10 text-primary" />}
+                    {service.iconName === 'Zap' && <Zap className="h-10 w-10 text-primary" />}
+                    {service.iconName === 'TrendingUp' && <TrendingUp className="h-10 w-10 text-primary" />}
+                    {service.iconName === 'CheckCircle2' && <CheckCircle2 className="h-10 w-10 text-primary" />}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground">{service.description}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -114,7 +101,7 @@ export default function Home() {
                 Why Choose GrowthSpike?
               </h2>
               <p className="text-muted-foreground text-lg">
-                We believe in transparency, data, and partnership. Unlike other agencies, we don't hide behind jargon. We show you the numbers that matter.
+                We believe in transparency, data, and partnership. Unlike other agencies, we don&apos;t hide behind jargon. We show you the numbers that matter.
               </p>
               <ul className="space-y-4">
                 {[
@@ -153,19 +140,34 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-20 bg-primary/5">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <div className="max-w-3xl mx-auto space-y-6">
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
-              Ready to Spike Your Growth?
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Book a free 30-minute strategy call with our experts. We'll audit your current digital presence and propose a roadmap for growth.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-              <Button size="lg" className="h-12 px-8 text-base">
-                Schedule Free Consultation
-              </Button>
+      <section id="contact" className="py-20 bg-background">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+            <div className="space-y-6 text-center lg:text-left">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+                Ready to Spike Your Growth?
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Book a free 30-minute strategy call with our experts. We&apos;ll audit your current digital presence and propose a roadmap for growth.
+              </p>
+              <div className="hidden lg:block space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">1</div>
+                  <span>We analyze your current performance</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">2</div>
+                  <span>Map out a 90-day growth plan</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">3</div>
+                  <span>Execute and iterate for maximum ROI</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full max-w-md mx-auto lg:mx-0">
+              <ContactForm />
             </div>
           </div>
         </div>
