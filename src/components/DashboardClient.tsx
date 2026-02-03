@@ -28,12 +28,30 @@ interface Lead {
 
 export default function DashboardClient({ leads }: { leads: Lead[] }) {
     const [searchQuery, setSearchQuery] = useState("");
+    const [activeView, setActiveView] = useState("dashboard"); // 'dashboard', 'inquiries', 'clients'
 
-    const filteredLeads = leads.filter((lead) =>
-        lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        lead.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        lead.company.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredLeads = leads.filter((lead) => {
+        // 1. Search Filter
+        const matchesSearch =
+            lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            lead.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            lead.company.toLowerCase().includes(searchQuery.toLowerCase());
+
+        if (!matchesSearch) return false;
+
+        // 2. View Filter
+        if (activeView === 'inquiries') {
+            // Show only 'New' or 'Contacted' leads
+            return lead.status === 'New' || lead.status === 'Contacted';
+        }
+        if (activeView === 'clients') {
+            // Show only 'Qualified' or 'Closed' (simulating clients)
+            return lead.status === 'Qualified' || lead.status === 'Closed';
+        }
+
+        // 'dashboard' view shows everything (or you could customize this)
+        return true;
+    });
 
     return (
         <div className="min-h-screen bg-background flex">
@@ -43,15 +61,27 @@ export default function DashboardClient({ leads }: { leads: Lead[] }) {
                     <span className="font-bold text-xl tracking-tight text-primary">GrowthSpike Admin</span>
                 </div>
                 <nav className="p-4 space-y-2">
-                    <Button variant="ghost" className="w-full justify-start text-primary bg-primary/10">
+                    <Button
+                        variant={activeView === 'dashboard' ? "secondary" : "ghost"}
+                        className={`w-full justify-start ${activeView === 'dashboard' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
+                        onClick={() => setActiveView('dashboard')}
+                    >
                         <LayoutDashboard className="mr-2 h-4 w-4" />
                         Dashboard
                     </Button>
-                    <Button variant="ghost" className="w-full justify-start text-muted-foreground hover:text-foreground">
+                    <Button
+                        variant={activeView === 'inquiries' ? "secondary" : "ghost"}
+                        className={`w-full justify-start ${activeView === 'inquiries' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
+                        onClick={() => setActiveView('inquiries')}
+                    >
                         <MessageSquare className="mr-2 h-4 w-4" />
                         Inquiries
                     </Button>
-                    <Button variant="ghost" className="w-full justify-start text-muted-foreground hover:text-foreground">
+                    <Button
+                        variant={activeView === 'clients' ? "secondary" : "ghost"}
+                        className={`w-full justify-start ${activeView === 'clients' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
+                        onClick={() => setActiveView('clients')}
+                    >
                         <Users className="mr-2 h-4 w-4" />
                         Clients
                     </Button>
@@ -77,7 +107,7 @@ export default function DashboardClient({ leads }: { leads: Lead[] }) {
                     <div className="flex items-center text-muted-foreground text-sm">
                         <span className="text-foreground font-medium">Dashboard</span>
                         <span className="mx-2">/</span>
-                        <span>Leads</span>
+                        <span className="capitalize">{activeView}</span>
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="relative hidden sm:block">
@@ -98,11 +128,11 @@ export default function DashboardClient({ leads }: { leads: Lead[] }) {
 
                 <div className="p-8 space-y-8">
                     <div>
-                        <h1 className="text-3xl font-bold tracking-tight">Lead Overview</h1>
+                        <h1 className="text-3xl font-bold tracking-tight capitalize">{activeView} Overview</h1>
                         <p className="text-muted-foreground">Manage your incoming consultation requests.</p>
                     </div>
 
-                    {/* Stats Grid */}
+                    {/* Stats Grid - Show in all views for now */}
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -151,7 +181,7 @@ export default function DashboardClient({ leads }: { leads: Lead[] }) {
                         <CardHeader>
                             <CardTitle>Recent Inquiries</CardTitle>
                             <CardDescription>
-                                You have {leads.length} total leads.
+                                Showing {filteredLeads.length} items.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -184,7 +214,7 @@ export default function DashboardClient({ leads }: { leads: Lead[] }) {
                                     ))}
                                     {filteredLeads.length === 0 && (
                                         <div className="p-8 text-center text-muted-foreground">
-                                            {leads.length > 0 ? "No leads found matching your search." : "No leads found. Check your JSON file."}
+                                            {leads.length > 0 ? "No leads found directly matching your filter." : "No leads found. Check your JSON file."}
                                         </div>
                                     )}
                                 </div>
