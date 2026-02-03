@@ -47,13 +47,13 @@ export function Footer() {
                         &copy; {new Date().getFullYear()} GrowthSpike Marketing. All rights reserved.
                     </p>
                     <div className="flex space-x-6">
-                        <Link href="#" className="text-muted-foreground hover:text-foreground">
+                        <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
                             <Twitter className="h-5 w-5" />
                         </Link>
-                        <Link href="#" className="text-muted-foreground hover:text-foreground">
+                        <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
                             <Linkedin className="h-5 w-5" />
                         </Link>
-                        <Link href="#" className="text-muted-foreground hover:text-foreground">
+                        <Link href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
                             <Github className="h-5 w-5" />
                         </Link>
                     </div>
