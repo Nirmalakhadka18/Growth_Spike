@@ -1,26 +1,114 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* HSL variables for easier manipulation */
+  --background: 210, 40%, 98%;
+  --foreground: 222, 47%, 11%;
+
+  --primary: 221, 83%, 53%;
+  --primary-foreground: 210, 40%, 98%;
+
+  --secondary: 210, 40%, 96.1%;
+  --secondary-foreground: 222, 47%, 11.2%;
+
+  --muted: 210, 40%, 96.1%;
+  --muted-foreground: 215, 16%, 47%;
+
+  --accent: 210, 40%, 96.1%;
+  --accent-foreground: 222, 47%, 11.2%;
+
+  --card: 0, 0%, 100%;
+  --card-foreground: 222, 47%, 11.2%;
+
+  --border: 214, 32%, 91%;
+  --input: 214, 32%, 91%;
+  --ring: 221, 83%, 53%;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom Animations */
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 222, 47%, 11%;
+    --foreground: 210, 40%, 98%;
+
+    --primary: 217, 91%, 60%;
+    --primary-foreground: 222, 47%, 11.2%;
+
+    --secondary: 217, 19%, 27%;
+    --secondary-foreground: 210, 40%, 98%;
+
+    --muted: 217, 19%, 27%;
+    --muted-foreground: 215, 20%, 65%;
+
+    --accent: 217, 19%, 27%;
+    --accent-foreground: 210, 40%, 98%;
+
+    --card: 222, 47%, 11%;
+    --card-foreground: 210, 40%, 98%;
+
+    --border: 217, 19%, 27%;
+    --input: 217, 19%, 27%;
+    --ring: 217, 91%, 60%;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

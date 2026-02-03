@@ -1,65 +1,190 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, BarChart3, Globe, Zap, CheckCircle2, TrendingUp, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 overflow-hidden bg-background">
+        <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] [mask-image:linear-gradient(to_bottom,transparent,black)] dark:bg-grid-slate-400/[0.05]" />
+
+        <div className="container relative mx-auto px-4 md:px-6">
+          <div className="flex flex-col items-center text-center space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center rounded-3xl border border-input bg-background/50 backdrop-blur-sm px-3 py-1 text-sm font-medium text-muted-foreground shadow-sm"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <span className="flex h-2 w-2 rounded-full bg-primary mr-2" />
+              Now accepting new clients for Q2
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Scale Your Business With <br />
+              <span className="text-primary">Data-Driven Marketing</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="max-w-[700px] text-lg text-muted-foreground md:text-xl"
+            >
+              We combine creative strategy with technical expertise to turn your visitors into loyal customers. No fluff, just results.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            >
+              <Button size="lg" className="h-12 px-8 text-base">
+                Start Your Growth <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="lg" className="h-12 px-8 text-base">
+                View Our Work
+              </Button>
+            </motion.div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl mb-4">Our Expertise</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Comprehensive marketing solutions designed to cover every aspect of your digital journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ServiceCard
+              icon={<Globe className="h-10 w-10 text-primary" />}
+              title="SEO Optimization"
+              description="Rank higher on search engines and attract organic traffic with our proven SEO strategies."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <ServiceCard
+              icon={<BarChart3 className="h-10 w-10 text-primary" />}
+              title="Paid Advertising"
+              description="Maximize ROI with targeted PPC campaigns on Google, Facebook, and LinkedIn."
+            />
+            <ServiceCard
+              icon={<Users className="h-10 w-10 text-primary" />}
+              title="Social Media Marketing"
+              description="Build a loyal community and engage your audience with compelling social content."
+            />
+            <ServiceCard
+              icon={<Zap className="h-10 w-10 text-primary" />}
+              title="Content Strategy"
+              description="Create valuable content that educates, entertains, and converts your target audience."
+            />
+            <ServiceCard
+              icon={<TrendingUp className="h-10 w-10 text-primary" />}
+              title="Conversion Rate Optimization"
+              description="Turn more visitors into customers by optimizing your website's user experience."
+            />
+            <ServiceCard
+              icon={<CheckCircle2 className="h-10 w-10 text-primary" />}
+              title="Analytics & Reporting"
+              description="Transparent reporting that shows you exactly where your budget is going and the results achieved."
+            />
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Stats/Why Us Section */}
+      <section id="about" className="py-20 border-t border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+                Why Choose GrowthSpike?
+              </h2>
+              <p className="text-muted-foreground text-lg">
+                We believe in transparency, data, and partnership. Unlike other agencies, we don't hide behind jargon. We show you the numbers that matter.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  "Dedicated Account Manager for every client",
+                  "Bi-weekly performance reporting",
+                  "Month-to-month contracts available",
+                  "Custom strategy tailored to your industry"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-muted p-6 rounded-2xl text-center space-y-2">
+                <div className="text-4xl font-bold text-primary">98%</div>
+                <div className="text-sm font-medium text-muted-foreground">Client Retention</div>
+              </div>
+              <div className="bg-muted p-6 rounded-2xl text-center space-y-2">
+                <div className="text-4xl font-bold text-primary">250+</div>
+                <div className="text-sm font-medium text-muted-foreground">Projects Launched</div>
+              </div>
+              <div className="bg-muted p-6 rounded-2xl text-center space-y-2">
+                <div className="text-4xl font-bold text-primary">5x</div>
+                <div className="text-sm font-medium text-muted-foreground">Average ROI</div>
+              </div>
+              <div className="bg-muted p-6 rounded-2xl text-center space-y-2">
+                <div className="text-4xl font-bold text-primary">24/7</div>
+                <div className="text-sm font-medium text-muted-foreground">Support Available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section id="contact" className="py-20 bg-primary/5">
+        <div className="container mx-auto px-4 md:px-6 text-center">
+          <div className="max-w-3xl mx-auto space-y-6">
+            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+              Ready to Spike Your Growth?
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Book a free 30-minute strategy call with our experts. We'll audit your current digital presence and propose a roadmap for growth.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+              <Button size="lg" className="h-12 px-8 text-base">
+                Schedule Free Consultation
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+  );
+}
+
+function ServiceCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all"
+    >
+      <div className="mb-4 bg-primary/10 w-fit p-3 rounded-lg">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
+    </motion.div>
   );
 }
