@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,56 +5,39 @@ import {
     ArrowUpRight,
     MessageSquare,
     Clock,
-    CheckCircle2,
     MoreHorizontal,
     Search,
     LayoutDashboard,
     Settings,
     LogOut
 } from "lucide-react";
-import Link from "next/link";
+import fs from 'fs/promises';
+import path from 'path';
 
-// Mock Data for the Dashboard
-const leads = [
-    {
-        id: 1,
-        name: "Alice Freeman",
-        email: "alice@techcorp.com",
-        company: "TechCorp Inc.",
-        status: "New",
-        date: "2 mins ago",
-        message: "Interested in a full SEO audit for our SaaS product..."
-    },
-    {
-        id: 2,
-        name: "Robert Langdon",
-        email: "robert@symbol.org",
-        company: "Symbolics",
-        status: "Contacted",
-        date: "2 hours ago",
-        message: "We need help scaling our paid social campaigns..."
-    },
-    {
-        id: 3,
-        name: "Sarah Connor",
-        email: "sarah@skynet.net",
-        company: "Cyberdyne Systems",
-        status: "Qualified",
-        date: "1 day ago",
-        message: "Looking for a content strategy to rebrand our AI division."
-    },
-    {
-        id: 4,
-        name: "James Bond",
-        email: "007@mi6.gov.uk",
-        company: "MI6",
-        status: "Closed",
-        date: "2 days ago",
-        message: "Confidential marketing consultation required."
-    },
-];
+// Define the Lead type based on our JSON structure
+interface Lead {
+    id: number;
+    name: string;
+    email: string;
+    company: string;
+    status: string;
+    date: string;
+    message: string;
+}
 
-export default function DashboardPage() {
+async function getLeads(): Promise<Lead[]> {
+    const filePath = path.join(process.cwd(), 'src/data/leads.json');
+    try {
+        const data = await fs.readFile(filePath, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        return [];
+    }
+}
+
+export default async function DashboardPage() {
+    const leads = await getLeads();
+
     return (
         <div className="min-h-screen bg-background flex">
             {/* Sidebar */}
@@ -100,14 +81,6 @@ export default function DashboardPage() {
                         <span>Leads</span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <div className="relative hidden sm:block">
-                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <input
-                                type="search"
-                                placeholder="Search leads..."
-                                className="h-9 w-64 rounded-md border border-input bg-background pl-9 pr-4 text-sm outline-none focus:ring-1 focus:ring-primary"
-                            />
-                        </div>
                         <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
                             A
                         </div>
@@ -128,8 +101,8 @@ export default function DashboardPage() {
                                 <Users className="h-4 w-4 text-muted-foreground" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">1,248</div>
-                                <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+                                <div className="text-2xl font-bold">{leads.length}</div>
+                                <p className="text-xs text-muted-foreground">Real-time Data</p>
                             </CardContent>
                         </Card>
                         <Card>
@@ -138,8 +111,8 @@ export default function DashboardPage() {
                                 <MessageSquare className="h-4 w-4 text-primary" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">+12</div>
-                                <p className="text-xs text-muted-foreground">+18% since last week</p>
+                                <div className="text-2xl font-bold">{leads.filter(l => l.status === 'New').length}</div>
+                                <p className="text-xs text-muted-foreground">Requires attention</p>
                             </CardContent>
                         </Card>
                         <Card>
@@ -148,8 +121,8 @@ export default function DashboardPage() {
                                 <Clock className="h-4 w-4 text-muted-foreground" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">1h 20m</div>
-                                <p className="text-xs text-muted-foreground">-4 mins from yesterday</p>
+                                <div className="text-2xl font-bold">--</div>
+                                <p className="text-xs text-muted-foreground">Calculated periodically</p>
                             </CardContent>
                         </Card>
                         <Card>
@@ -158,8 +131,8 @@ export default function DashboardPage() {
                                 <ArrowUpRight className="h-4 w-4 text-green-500" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">4.3%</div>
-                                <p className="text-xs text-muted-foreground">+1.2% from last month</p>
+                                <div className="text-2xl font-bold">--</div>
+                                <p className="text-xs text-muted-foreground">Set up analytics for data</p>
                             </CardContent>
                         </Card>
                     </div>
@@ -169,7 +142,7 @@ export default function DashboardPage() {
                         <CardHeader>
                             <CardTitle>Recent Inquiries</CardTitle>
                             <CardDescription>
-                                You have 3 unread messages from today.
+                                You have {leads.length} total leads.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -200,9 +173,11 @@ export default function DashboardPage() {
                                             </div>
                                         </div>
                                     ))}
-                                    <div className="p-4 text-center text-muted-foreground text-xs">
-                                        Viewing 4 of 12 new leads
-                                    </div>
+                                    {leads.length === 0 && (
+                                        <div className="p-8 text-center text-muted-foreground">
+                                            No leads found. Check your JSON file.
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </CardContent>

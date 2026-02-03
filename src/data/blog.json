@@ -1,0 +1,47 @@
+[
+    {
+        "slug": "future-of-seo-2024",
+        "title": "The Future of SEO in 2024: What You Need to Know",
+        "excerpt": "Discover the latest trends in Search Engine Optimization, from AI-generated content signals to the rise of voice search and zero-click searches.",
+        "content": "<p>Search Engine Optimization is constantly evolving. As we move into 2024, the landscape is shifting more rapidly than ever before.</p><h2>The Rise of AI in Search</h2><p>With Google's Search Generative Experience (SGE), the way users find answers is changing. Content creators need to focus on deep, authoritative content that provides unique value beyond what an AI summary can offer.</p><h2>Core Web Vitals</h2><p>User experience remains paramount. Fast loading times, stability, and interactivity are no longer optional—they are critical ranking factors.</p>",
+        "date": "Jan 12, 2024",
+        "author": "Sarah Jenkins",
+        "authorRole": "SEO Specialist",
+        "tags": [
+            "SEO",
+            "Trends",
+            "2024"
+        ],
+        "image": "https://images.unsplash.com/photo-1572177812156-58036aae439c?auto=format&fit=crop&q=80&w=2070"
+    },
+    {
+        "slug": "social-media-algorithms",
+        "title": "Cracking the Code: Social Media Algorithms Explained",
+        "excerpt": "Stop guessing and start growing. We break down how the algorithms of Instagram, LinkedIn, and TikTok actually work.",
+        "content": "<p>Social media reach is often misunderstood. It's not about luck; it's about signals.</p><h2>Engagement Velocity</h2><p>Platforms love content that gets engagement <em>quickly</em>. The first hour after posting is crucial.</p><h2>Linkedin's Professional Focus</h2><p>LinkedIn prioritizes content that sparks conversation. Comments are worth far more than likes in their algorithm.</p>",
+        "date": "Jan 18, 2024",
+        "author": "Marcus Thorne",
+        "authorRole": "Social Media Manager",
+        "tags": [
+            "Social Media",
+            "Growth",
+            "Algorithms"
+        ],
+        "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1974"
+    },
+    {
+        "slug": "covert-leads-to-customers",
+        "title": "How to Convert Leads into Long-Term Customers",
+        "excerpt": "Lead generation is just the first step. Learn the nurturing strategies that turn interested prospects into loyal brand advocates.",
+        "content": "<p>Getting a lead is easy. Keeping a customer is an art.</p><h2>The Power of Email Automation</h2><p>Don't let leads go cold. Set up automated nurturing sequences that provide value, not just sales pitches.</p><h2>Personalization at Scale</h2><p>Use data to segment your audience. A personalized recommendation is infinitely more powerful than a generic blast.</p>",
+        "date": "Jan 25, 2024",
+        "author": "Elena Rodriguez",
+        "authorRole": "Marketing Director",
+        "tags": [
+            "Marketing",
+            "Sales",
+            "Conversion"
+        ],
+        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2070"
+    }
+]

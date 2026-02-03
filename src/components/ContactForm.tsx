@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { submitContactForm } from "@/app/actions";
 
 export function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -12,11 +13,13 @@ export function ContactForm() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        const formData = new FormData(e.currentTarget);
+        const result = await submitContactForm(formData);
 
         setIsSubmitting(false);
-        setIsSuccess(true);
+        if (result.success) {
+            setIsSuccess(true);
+        }
     }
 
     if (isSuccess) {
@@ -27,7 +30,7 @@ export function ContactForm() {
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Request Received!</h3>
                 <p className="text-muted-foreground mb-6">
-                    Thanks for reaching out. One of our strategists will contact you within 24 hours to schedule your consultation.
+                    Thanks for reaching out. One of our strategists will contact you within 24 hours.
                 </p>
                 <Button onClick={() => setIsSuccess(false)} variant="outline">
                     Send another message
@@ -45,6 +48,7 @@ export function ContactForm() {
                     </label>
                     <input
                         id="name"
+                        name="name"
                         required
                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         placeholder="John Doe"
@@ -56,6 +60,7 @@ export function ContactForm() {
                     </label>
                     <input
                         id="email"
+                        name="email"
                         type="email"
                         required
                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -70,6 +75,7 @@ export function ContactForm() {
                 </label>
                 <input
                     id="company"
+                    name="company"
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="www.yourcompany.com"
                 />
@@ -81,6 +87,7 @@ export function ContactForm() {
                 </label>
                 <textarea
                     id="message"
+                    name="message"
                     required
                     className="flex min-h-[100px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Tell us about your goals..."
